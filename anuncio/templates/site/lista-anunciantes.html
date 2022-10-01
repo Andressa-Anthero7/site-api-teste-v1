@@ -64,17 +64,20 @@
     <div style="position:relative;left:150px;top:10px;">
         <!--Anuncio -->
        <ul style="list-style:none;" >
-            {% if anuncio %}
-                   {% for anuncio in anuncio %}
+            {% if anunciantes %}
+                   {% for anunciantes in anunciantes %}
                    <li class=" p-0 ">
                        <div class=" border border-bottom border-dark rounded pl-5 ml-3 pt-3" >
-                           <h2>Anuncio #{{anuncio.id}}</h2>
-                           <div>Marca :{{anuncio.nome_marca}}</div>
-                           <div>Modelo :{{anuncio.nome_modelo}}</div>
-                           <div>Cor : {{anuncio.cor}}</div>
+                           <h2>Anunciante #{{anunciantes.id}}</h2>
+                           <div>Username :{{anunciantes.username}}</div>
+                           <div>Email :{{anunciantes.email}}</div>
+                            {% for token in token %}
+                           <div>Token Api: {{token}}</div>
+                           {% endfor %}
+
                             <span class="icones">
-                               <a href="/editar-anuncio/{{anuncio.pk}}/" class="btn btn-warning mx-5" >Editar</a>
-                                <a href="/deletar-anuncio/{{anuncio.pk}}/" class="btn btn-warning mx-5" >Deletar</a>
+                               <a href="" class="btn btn-warning mx-5" >Editar</a>
+                                <a href="" class="btn btn-warning mx-5" >Deletar</a>
                              </span>
                        </div>
 

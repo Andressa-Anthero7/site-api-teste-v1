@@ -1,12 +1,25 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from anuncio.models import Anuncio
+from django.urls import reverse
+
+from anuncio.models import Anuncio, Anunciante
+from django.db.models import Q
+from rest_framework.authtoken.models import Token
+from django.contrib.auth.models import User
 
 
 # Create your views here.
 
 def index(request):
     anuncio = reversed(Anuncio.objects.all())
-    return render(request, 'site/index.html', {'anuncio': anuncio})
+    busca = request.GET.get('search')
+    if busca:
+        anuncio = Anuncio.objects.filter(
+            Q(nome_modelo__icontains=busca) | Q(nome_marca__icontains=busca) | Q(
+                cor__icontains=busca)
+        )
+    print(busca)
+    return render(request, 'site/index.html', {'anuncio': anuncio,
+                                               'busca': busca})
 
 
 def criar(request):
@@ -36,3 +49,28 @@ def deletar(request, pk):
     anuncio.delete()
     return redirect('index')
 
+
+def criar_user(request):
+    if request.method == "POST":
+        user = request.POST.get('nome_user')
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+        novoUsuario = User.objects.create_user(username=user, email=email, password=password)
+        novoUsuario.save()
+        return redirect(reverse('area-anunciantes', args=[novoUsuario.pk]))
+    else:
+        return render(request, 'site/criar-user.html')
+
+
+def area_anunciantes(request, pk):
+    anunciante = User.objects.filter(pk=pk)
+    token = Token.objects.filter(user=pk)
+    print(token)
+    return render(request, 'site/lista-anunciantes.html', {'anunciantes': anunciante,
+                                                           'token': token})
+
+
+def criar_token(request):
+    token = Token.objects.create(User)
+    Anunciante.objects.create(user_anunciante=user, user_email=email, password_anunciante=password, token_api=token)
+    return redirect(lista_anunciantes)

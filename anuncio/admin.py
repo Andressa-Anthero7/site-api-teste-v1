@@ -1,5 +1,5 @@
 from django.contrib import admin
-from anuncio.models import Anuncio
+from anuncio.models import Anuncio, Anunciante
 
 
 class Tabela(admin.ModelAdmin):
@@ -9,3 +9,4 @@ class Tabela(admin.ModelAdmin):
 
 
 admin.site.register(Anuncio, Tabela)
+admin.site.register(Anunciante)
