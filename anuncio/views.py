@@ -27,7 +27,8 @@ def criar(request):
         modelo = request.POST.get('nome_modelo')
         marca = request.POST.get('nome_marca')
         cor = request.POST.get('cor')
-        Anuncio.objects.create(nome_modelo=modelo, nome_marca=marca, cor=cor)
+        anunciado_por = request.user
+        Anuncio.objects.create(nome_modelo=modelo, nome_marca=marca, cor=cor, anunciado_por=anunciado_por)
         return redirect('index')
     return render(request, 'site/anunciar.html')
 

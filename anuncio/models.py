@@ -13,6 +13,7 @@ class Anuncio(models.Model):
     nome_marca = models.CharField(max_length=100)
     nome_modelo = models.CharField(max_length=100)
     cor = models.CharField(max_length=100)
+    anunciado_por = models.CharField(max_length=100)
 
 
 @receiver(post_save, sender=settings.AUTH_USER_MODEL)
