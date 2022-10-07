@@ -9,11 +9,14 @@ from rest_framework.authtoken.models import Token
 
 
 class Anuncio(models.Model):
-    tipo_veiculo = models.CharField(max_length=100)
     nome_marca = models.CharField(max_length=100)
     nome_modelo = models.CharField(max_length=100)
+    ano = models.CharField(max_length=4)
     cor = models.CharField(max_length=100)
     anunciado_por = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.pk
 
 
 @receiver(post_save, sender=settings.AUTH_USER_MODEL)

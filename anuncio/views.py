@@ -24,11 +24,12 @@ def index(request):
 
 def criar(request):
     if request.method == "POST":
-        modelo = request.POST.get('nome_modelo')
         marca = request.POST.get('nome_marca')
+        modelo = request.POST.get('nome_modelo')
+        ano = request.POST.get('ano')
         cor = request.POST.get('cor')
         anunciado_por = request.user
-        Anuncio.objects.create(nome_modelo=modelo, nome_marca=marca, cor=cor, anunciado_por=anunciado_por)
+        Anuncio.objects.create(nome_modelo=modelo, nome_marca=marca, cor=cor, ano=ano, anunciado_por=anunciado_por)
         return redirect('index')
     return render(request, 'site/anunciar.html')
 

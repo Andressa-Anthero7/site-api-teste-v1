@@ -5,4 +5,4 @@ from anuncio.models import Anuncio
 class AnuncioSerializer(serializers.ModelSerializer):
     class Meta:
         model = Anuncio
-        fields = ['id', 'nome_modelo', 'nome_marca', 'cor', 'anunciado_por']
+        fields = ['id', 'nome_marca',  'nome_modelo', 'ano', 'cor', 'anunciado_por']
