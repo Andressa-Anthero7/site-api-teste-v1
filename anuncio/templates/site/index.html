@@ -1,9 +1,14 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-br" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html"
+      xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
 {% load static %}
 <head>
-    <meta charset="UTF-8">
-    <title>Api-Veiculos</title>
+   <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Lista de MARCA E MODELOS E ANOS CARROS Cidades Usando Jquery e JSON</title>
+
+
+    <script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous"></script>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
@@ -14,15 +19,11 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet" />
 
 
-</head>
+    <style>
 
-
-<style>
-    li{
-        font-weight:900;
-        max-width:800px;
-
-    }
+     .anuncio {
+        max-width:980px;
+     }
 
     .texto-anuncio, .texto-anuncio-nao-encontrado{
          position:relative:
@@ -33,8 +34,8 @@
 
     .icones{
         position:relative;
-        top:-80px;
-        left:280px;
+        top:-50px;
+        left:700px;
     }
 
     .search-box{
@@ -42,6 +43,15 @@
         left:80px;
     }
 </style>
+
+
+
+
+
+</head>
+
+
+
 <body>
     <div><h1 class="p-3 m-2">Anuncios</h1></div>
 
@@ -61,20 +71,486 @@
 
 
     <!-- DISPLAY DO ANUNCIO -->
-    <div style="position:relative;left:150px;top:10px;">
+    <div style="position:relative;left:50px;top:10px;">
         <!--Anuncio -->
        <ul style="list-style:none;" >
             {% if anuncio %}
                    {% for anuncio in anuncio %}
                    <li class=" p-0 ">
-                       <div class=" border border-bottom border-dark rounded pl-5 ml-3 pt-3" >
-                           <h2>Anuncio #{{anuncio.id}}</h2>
-                           <div>Marca :{{anuncio.nome_marca}}</div>
-                           <div>Modelo :{{anuncio.nome_modelo}}</div>
-                           <div>Cor : {{anuncio.cor}}</div>
+                       <div class=" border border-bottom border-dark rounded pl-5 ml-3 pt-3 anuncio " >
+                           <h2>Anuncio #{{anuncio.id|default_if_none:"nothing"}}</h2>
+                           <div>Marca :{{anuncio.nome_marca|default_if_none:"nothing"}}</div>
+                           <div>Modelo :{{anuncio.nome_modelo|default_if_none:"nothing"}}</div>
+                           <div>Ano : {{anuncio.ano|default_if_none:"nothing"}}</div>
+                           <div>Cor : {{anuncio.cor|default_if_none:"nothing"}}</div>
+                           <div>Câmbio: {{anuncio.cambio|default_if_none:"nothing"}}</div>
+                           <div>Combustivel: {{anuncio.combustivel|default_if_none:"nothing"}}</div>
+                           <div>Portas: {{anuncio.portas|default_if_none:"nothing"}}</div>
+                           <div>IPVA: {{anuncio.ipva|default_if_none:"nothing"}}</div>
+                           <div>Placa: {{anuncio.placa|default_if_none:"nothing"}}</div>
+                           <div>Valor: {{anuncio.valor|default_if_none:"nothing"}}</div>
+                           <div class="border border-dark rounded my-2">
+                               <h6 class="m-1 p-1 ">Informações Complementares</h6>
+                               <div class="m-3 p-1">{{anuncio.info_complementares|default_if_none:"Não há informações Complementares"}}</div>
+                           </div>
+
+
+
+                           <div class="border border-dark  p-2">
+                               <h6>Opcionais Veiculos</h6>
+                                <div id="opcionais" class="row">
+                                    {% if anuncio.acendedor_cigarros %}
+                                        <span class="col-4">
+                                            <span class="fa fa-check" style="color:green;"></span>
+                                            <span class="">{{anuncio.acendedor_cigarros}}</span>
+                                        </span>
+                                    {% endif %}
+
+                                    {% if anuncio.air_bags %}
+                                        <span class="col-4">
+                                            <span class="fa fa-check" style="color:green;"></span>
+                                            <span class="">{{anuncio.air_bags}}</span>
+                                        </span>
+                                    {% endif %}
+
+
+                                    {% if anuncio.alarme %}
+                                         <span class="col-4">
+                                            <span class="fa fa-check" style="color:green;"></span>
+                                            <span class="">{{anuncio.alarme}}</span>
+                                        </span>
+                                    {% endif %}
+
+                                    {% if anuncio.ar_condicionado %}
+                                        <span class="col-4">
+                                             <span class="fa fa-check" style="color:green;"></span>
+                                             <span class="">{{anuncio.ar_condicionado}}</span>
+                                        </span>
+
+                                    {% endif %}
+
+                                    {% if anuncio.ar_condicionado_digital %}
+                                         <span class="col-4">
+                                            <span class="fa fa-check" style="color:green;"></span>
+                                            <span class="">{{anuncio.ar_condicionado_digital}}</span>
+                                        </span>
+                                    {% endif %}
+
+                                    {% if anuncio.ar_condicionado_dual_zone %}
+                                         <span class="col-4">
+                                            <span class="fa fa-check" style="color:green;"></span>
+                                            <span class="">{{anuncio.ar_condicionado_dual_zone}}</span>
+                                        </span>
+                                    {% endif %}
+
+                                    {% if anuncio.ar_quente %}
+                                         <span class="col-4">
+                                            <span class="fa fa-check" style="color:green;"></span>
+                                            <span class="">{{anuncio.ar_quente}}</span>
+                                        </span>
+                                    {% endif %}
+
+                                    {% if anuncio.assistente_saida_aclive %}
+                                         <span class="col-4">
+                                            <span class="fa fa-check" style="color:green;"></span>
+                                            <span class="">{{anuncio.assistente_saida_aclive}}</span>
+                                        </span>
+                                    {% endif %}
+
+                                    {% if anuncio.sistema_som %}
+                                         <span class="col-4">
+                                             <span class="fa fa-check" style="color:green;"></span>
+                                             <span class="">{{anuncio.assistente_saida_aclive}}</span>
+                                        </span>
+
+                                    {% endif %}
+
+                                    {% if anuncio.banco_apoio_braco %}
+                                         <span class="col-4">
+                                            <span class="fa fa-check" style="color:green;"></span>
+                                            <span class="">{{anuncio.banco_apoio_braco}}</span>
+                                        </span>
+                                    {% endif %}
+
+                                    {% if anuncio.banco_regulagem_eletrica %}
+                                        <span class="col-4">
+                                            <span class="fa fa-check" style="color:green;"></span>
+                                            <span class="">{{anuncio.banco_regulagem_eletrica}}</span>
+                                        </span>
+                                    {% endif %}
+
+                                    {% if anuncio.blindado %}
+                                         <span class="col-4">
+                                            <span class="fa fa-check" style="color:green;"></span>
+                                            <span class="">{{anuncio.blindado}}</span>
+                                        </span>
+                                    {% endif %}
+
+                                    {% if anuncio.bluetooth %}
+                                         <span class="col-4">
+                                            <span class="fa fa-check" style="color:green;"></span>
+                                            <span class="">{{anuncio.bluetooth}}</span>
+                                        </span>
+                                    {% endif %}
+
+                                    {% if anuncio.calotas %}
+                                         <span class="col-4">
+                                            <span class="fa fa-check" style="color:green;"></span>
+                                            <span class="">{{anuncio.calotas}}</span>
+                                        </span>
+                                    {% endif %}
+
+                                    {% if anuncio.camera_re %}
+                                         <span class="col-4">
+                                             <span class="fa fa-check" style="color:green;"></span>
+                                            <span class="">{{anuncio.camera_re}}</span>
+                                        </span>
+                                    {% endif %}
+
+                                    {% if anuncio.carregador_dispostivo_wireless %}}
+                                         <span class="col-4">
+                                             <span class="fa fa-check" style="color:green;"></span>
+                                            <span class="">{{anuncio.carregador_dispositivo_wireless}}</span>
+                                        </span>
+                                    {% endif %}
+
+                                    {% if anuncio.cd_mp3 %}
+                                        <span class="col-4">
+                                            <span class="fa fa-check" style="color:green;"></span>
+                                            <span class="">{{anuncio.cd_mp3}}</span>
+                                        </span>
+                                    {% endif %}
+
+                                    {% if anuncio.chave_keyless %}
+                                        <span class="col-4">
+                                            <span class="fa fa-check" style="color:green;"></span>
+                                            <span class="">{{anuncio.chave_keyless}}</span>
+                                        </span>
+                                    {% endif %}
+
+                                    {% if anuncio.chave_sensor_presenca %}
+                                         <span class="col-4">
+                                            <span class="fa fa-check" style="color:green;"></span>
+                                            <span class="">{{anuncio.chave_sensor_presenca}}</span>
+                                        </span>
+                                    {% endif %}
+
+                                    {% if anuncio.computador_bordo %}
+                                        <span class="col-4">
+                                            <span class="fa fa-check" style="color:green;"></span>
+                                            <span class="">{{anuncio.computador_bordo}}</span>
+                                        </span>
+                                    {% endif %}
+
+                                    {% if anuncio.controle_som_volante %}
+                                         <span class="col-4">
+                                            <span class="fa fa-check" style="color:green;"></span>
+                                            <span class="">{{anuncio.controle_som_volante}}</span>
+                                        </span>
+                                    {% endif %}
+
+                                    {% if anuncio.controle_eletronico_descida %}
+                                         <span class="col-4">
+                                            <span class="fa fa-check" style="color:green;"></span>
+                                            <span class="">{{anuncio.controle_eletronico_descida}}</span>
+                                        </span>
+                                    {% endif %}
+
+                                    {% if anuncio.desembacador_traseiro %}
+                                         <span class="col-4">
+                                            <span class="fa fa-check" style="color:green;"></span>
+                                            <span class="">{{anuncio.desembacador_traseiro}}</span>
+                                        </span>
+                                    {% endif %}
+
+                                    {% if anuncio.direcao_eletrica %}
+                                         <span class="col-4">
+                                            <span class="fa fa-check" style="color:green;"></span>
+                                            <span class="">{{anuncio.direcao_eletrica}}</span>
+                                        </span>
+                                    {% endif %}
+
+                                    {% if anuncio.direcao_hidraulica %}
+                                         <span class="col-4">
+                                            <span class="fa fa-check" style="color:green;"></span>
+                                            <span class="">{{anuncio.direcao_hidraulica}}</span>
+                                        </span>
+                                    {% endif %}
+
+                                    {% if anuncio.encosto_cabeca_traseiro %}
+                                         <span class="col-4">
+                                            <span class="fa fa-check" style="color:green;"></span>
+                                            <span class="">{{anuncio.encosto_cabeca_traseiro}}</span>
+                                        </span>
+                                    {% endif %}
+
+                                    {% if anuncio.estribo %}
+                                          <span class="col-4">
+                                            <span class="fa fa-check" style="color:green;"></span>
+                                            <span class="">{{anuncio.estribo}}</span>
+                                         </span>
+                                    {% endif %}
+
+                                    {% if anuncio.farois_automatico %}
+                                         <span class="col-4">
+                                            <span class="fa fa-check" style="color:green;"></span>
+                                            <span class="">{{anuncio.farois_automatico}}</span>
+                                         </span>
+                                    {% endif %}
+
+                                    {% if anuncio.farois_milhas %}
+                                          <span class="col-4">
+                                            <span class="fa fa-check" style="color:green;"></span>
+                                            <span class="">{{anuncio.farois_milhas}}</span>
+                                         </span>
+                                    {% endif %}
+
+                                    {% if anuncio.farois_neblina %}
+                                         <span class="col-4">
+                                            <span class="fa fa-check" style="color:green;"></span>
+                                            <span class="">{{anuncio.farois_neblina}}</span>
+                                         </span>
+                                    {% endif %}
+
+                                    {% if anuncio.freio_abs %}
+                                          <span class="col-4">
+                                            <span class="fa fa-check" style="color:green;"></span>
+                                            <span class="">{{anuncio.freio_abs}}</span>
+                                         </span>
+                                    {% endif %}
+
+                                    {% if anuncio.gps %}
+                                          <span class="col-4">
+                                            <span class="fa fa-check" style="color:green;"></span>
+                                            <span class="">{{anuncio.gps}}</span>
+                                         </span>
+                                    {% endif %}
+
+                                    {% if  anuncio.insulfilm %}
+                                          <span class="col-4">
+                                            <span class="fa fa-check" style="color:green;"></span>
+                                            <span class="">{{anuncio.insulfilm}}</span>
+                                         </span>
+                                    {% endif %}
+
+                                    {% if anuncio.lona_maritima %}
+                                         <span class="col-4">
+                                            <span class="fa fa-check" style="color:green;"></span>
+                                            <span class="">{{anuncio.lona_maritima}}</span>
+                                         </span>
+                                    {% endif %}
+
+                                    {% if anuncio.multimidia %}
+                                          <span class="col-4">
+                                            <span class="fa fa-check" style="color:green;"></span>
+                                            <span class="">{{anuncio.multimidia}}</span>
+                                         </span>
+
+                                    {% endif %}
+
+                                    {% if anuncio.painel_lcd %}
+                                          <span class="col-4">
+                                            <span class="fa fa-check" style="color:green;"></span>
+                                            <span class="">{{anuncio.painel_lcd}}</span>
+                                         </span>
+                                    {% endif %}
+
+                                    {% if anuncio.painel_digital %}
+                                         <span class="col-4">
+                                            <span class="fa fa-check" style="color:green;"></span>
+                                            <span class="">{{anuncio.painel_digital}}</span>
+                                        </span>
+                                    {% endif %}
+
+                                    {% if anuncio.painel_lcd %}
+                                         <span class="col-4">
+                                            <span class="fa fa-check" style="color:green;"></span>
+                                            <span class="">{{anuncio.painel_lcd}}</span>
+                                        </span>
+                                    {% endif %}
+
+                                     {% if anuncio.parachoque_cor_veiculos %}
+                                         <span class="col-4">
+                                            <span class="fa fa-check" style="color:green;"></span>
+                                            <span class="">{{anuncio.parachoque_cor_veiculos}}</span>
+                                        </span>
+                                    {% endif %}
+
+                                    {% if anuncio.park_assist %}
+                                         <span class="col-4">
+                                            <span class="fa fa-check" style="color:green;"></span>
+                                            <span class="">{{anuncio.park_assist}}</span>
+                                        </span>
+                                    {% endif %}
+
+                                    {% if anuncio.partida_start_stop %}
+                                         <span class="col-4">
+                                            <span class="fa fa-check" style="color:green;"></span>
+                                            <span class="">{{anuncio.partida_start_stop}}</span>
+                                        </span>
+                                    {% endif %}
+
+                                    {% if anuncio.piloto_automatico %}
+                                         <span class="col-4">
+                                            <span class="fa fa-check" style="color:green;"></span>
+                                            <span class="">{{anuncio.piloto_automatico}}</span>
+                                        </span>
+                                    {% endif %}
+
+                                    {% if anuncio.pintura_metalica %}
+                                         <span class="col-4">
+                                            <span class="fa fa-check" style="color:green;"></span>
+                                            <span class="">{{anuncio.pintura_metalica}}</span>
+                                        </span>
+                                    {% endif %}
+
+                                    {% if anuncio.porta_copo %}
+                                         <span class="col-4">
+                                            <span class="fa fa-check" style="color:green;"></span>
+                                            <span class="">{{anuncio.porta_copo}}</span>
+                                        </span>
+                                    {% endif %}
+
+                                    {% if anuncio.protecao_cacamba %}
+                                        <span class="col-4">
+                                            <span class="fa fa-check" style="color:green;"></span>
+                                            <span class="">{{anuncio.protecao_cacamba}}</span>
+                                        </span>
+                                    {% endif %}
+
+                                    {% if anuncio.radio %}
+                                         <span class="col-4">
+                                            <span class="fa fa-check" style="color:green;"></span>
+                                            <span class="">{{anuncio.radio}}</span>
+                                        </span>
+                                    {% endif %}
+
+                                    {% if anuncio.rebatimento_retrovisores_externos %}
+                                         <span class="col-4">
+                                            <span class="fa fa-check" style="color:green;"></span>
+                                            <span class="">{{anuncio.rebatimento_retrovisores_externos}}</span>
+                                        </span>
+                                    {% endif %}
+
+                                    {% if anuncio.retrovisor_fotocromatico %}
+                                        <span class="col-4">
+                                            <span class="fa fa-check" style="color:green;"></span>
+                                            <span class="">{{anuncio.retrovisor_fotocromatico}}</span>
+                                        </span>
+                                    {% endif %}
+
+                                    {% if anuncio.retrovisor_interno_eletrocromico %}
+                                         <span class="col-4">
+                                            <span class="fa fa-check" style="color:green;"></span>
+                                            <span class="">{{anuncio.retrovisor_interno_eletrocromico}}</span>
+                                        </span>
+                                    {% endif %}
+
+                                    {% if anuncio.retrovisor_eletrico %}
+                                         <span class="col-4">
+                                            <span class="fa fa-check" style="color:green;"></span>
+                                            <span class="">{{anuncio.retrovisor_eletrico}}</span>
+                                        </span>
+                                    {% endif %}
+
+                                    {% if anuncio.roda_liga_leve %}
+                                         <span class="col-4">
+                                            <span class="fa fa-check" style="color:green;"></span>
+                                            <span class="">{{anuncio.roda_liga_leve}}</span>
+                                        </span>
+                                    {% endif %}
+
+                                    {% if anuncio.sensor_chuva %}
+                                         <span class="col-4">
+                                            <span class="fa fa-check" style="color:green;"></span>
+                                            <span class="">{{anuncio.sensor_chuva}}</span>
+                                        </span>
+                                    {% endif %}
+
+
+                                    {% if anuncio.sensor_estacionamento_dianteiro %}
+                                         <span class="col-4">
+                                             <span class="fa fa-check" style="color:green;"></span>
+                                             <span class="">{{anuncio.sensor_estacionamento_dianteiro}}</span>
+                                        </span>
+                                    {% endif %}
+
+                                    {% if anuncio.sensor_estacionamento_traseiro %}
+                                        <span class="col-4">
+                                            <span class="fa fa-check" style="color:green;"></span>
+                                            <span class="">{{anuncio.sensor_estacionamento_traseiro}}</span>
+                                        </span>
+                                    {% endif %}
+
+                                    {% if anuncio.teto_solar %}
+                                         <span class="col-4">
+                                            <span class="fa fa-check" style="color:green;"></span>
+                                            <span class="">{{anuncio.teto_solar}}</span>
+                                        </span>
+                                    {% endif %}
+
+                                    {% if anuncio.teto_paranomico %}
+                                         <span class="col-4">
+                                             <span class="fa fa-check" style="color:green;"></span>
+                                             <span class="">{{anuncio.teto_paranomico}}</span>
+                                        </span>
+                                    {% endif %}
+
+                                    {% if anuncio.tracao %}
+                                         <span class="col-4">
+                                             <span class="fa fa-check" style="color:green;"></span>
+                                             <span class="">{{anuncio.tracao}}</span>
+                                        </span>
+                                    {% endif %}
+
+                                    {% if anuncio.trava_eletrica %}
+                                         <span class="col-4">
+                                            <span class="fa fa-check" style="color:green;"></span>
+                                            <span class="">{{anuncio.trava_eletrica}}</span>
+                                        </span>
+                                    {% endif %}
+
+                                    {% if anuncio.usb %}
+                                         <span class="col-4">
+                                             <span class="fa fa-check" style="color:green;"></span>
+                                             <span class="">{{anuncio.usb}}</span>
+                                       </span>
+                                    {% endif %}
+
+                                    {% if anuncio.vidro_eletrico %}
+                                         <span class="col-4">
+                                            <span class="fa fa-check" style="color:green;"></span>
+                                            <span class="">{{anuncio.vidro_eletrico}}</span>
+                                        </span>
+                                    {% endif %}
+
+                                    {% if anuncio.vidro_verdes %}
+                                         <span class="col-4">
+                                            <span class="fa fa-check" style="color:green;"></span>
+                                            <span class="">{{anuncio.anuncio.vidro_verdes}}</span>
+                                        </span>
+                                    {% endif %}
+
+                                    {% if anuncio.volante_regulagem_altura %}
+                                         <span class="col-4">
+                                            <span class="fa fa-check" style="color:green;"></span>
+                                            <span class="">{{anuncio.anuncio.volante_regulagem_altura}}</span>
+                                        </span>
+                                    {% endif %}
+
+
+
+
+
+                                </div>
+
+
+                           </div>
+
+
                             <span class="icones">
-                               <a href="/editar-anuncio/{{anuncio.pk}}/" class="btn btn-warning mx-5" >Editar</a>
-                                <a href="/deletar-anuncio/{{anuncio.pk}}/" class="btn btn-warning mx-5" >Deletar</a>
+                               <a href="/editar-anuncio/{{anuncio.pk}}/" class="btn btn-warning mx-2" >Editar</a>
+                                <a href="/deletar-anuncio/{{anuncio.pk}}/" class="btn btn-warning mx-2" >Deletar</a>
                              </span>
                        </div>
 
@@ -98,8 +574,9 @@
     </div>
 
 
-<!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+
+
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
