@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 {% load static %}
 <html>
 <head>
@@ -19,6 +20,8 @@
 
 
      <link rel="stylesheet" type="text/css" href="{% static 'css/estilo-area-anunciante.css' %}">
+
+     <!--<link rel="stylesheet" type="text/css" href="estilo-area-anunciante.css">-->
 
 
 
@@ -45,7 +48,7 @@
                     <span id="user" >
                         <span class="bg-warning ml-1" id="label-user">User</span>
 
-                        <span class="px-1" id="user-logado">{% if user.is_authenticated %} {{ user.get_username }}{% endif %}</span>
+                        <span class="px-1" id="user-logado">Andressa Veículos{% if user.is_authenticated %} {{ user.get_username }}{% endif %}</span>
 
                     </span>
 
@@ -104,7 +107,7 @@
 
         <!-- Field Select do Tipo do Anuncio -->
         <div  id="escolha-tipo-field">
-            <label id="escolha-tipo-veiculo" class="ml-5 bg-warning p-1 rounded">Escolha tipo veículo *</label>
+            <label id="escolha-tipo-veiculo" class=" bg-warning p-1 rounded">Escolha tipo veículo *</label>
 
             <select name="tipo-veiculo" id="tipo-veiculo" class="form-control " >
                 <option value="escolha">Escolha Tipo</option>
@@ -169,6 +172,10 @@
         });
 
 
+
+
+
+
         // abre o menu
 
        $(document).on('click','.btn-menu-bar', function () {
@@ -176,7 +183,7 @@
             //$('#formulario').css({'position':'relative','left':'170px','min-width':'1150px','min-height':'700px'})
              $('#menu-bar').addClass('btn-menu-bar-hide');
             $('#menu-bar').removeClass('btn-menu-bar');
-            $('#menu-lateral').css({'position':'fixed','top':'50px'})
+            $('#menu-lateral').css({'position':'fixed','top':'180px', 'width':'270px'})
 
 
 
@@ -365,10 +372,10 @@
 
 
                 <!-- CAMPO MARCA -->
-                <div class="col-10 mx-5" id="campo-marca" >
+                <div class=" mx-5" id="campo-marca" >
                     <label class="bg-warning px-2 pb-3 border rounded etiqueta">Marca *</label>
                     <select class="form-control" id="Marca" name="marca">
-                        <option>Selecionar Marca</option>
+                        <option>Marca</option>
                     </select>
                     <input name="field-marca" id="field-marca" hidden  >
                     <br>
@@ -380,7 +387,7 @@
                 <div class="ml-5  " id="campo-modelo">
                      <label class="bg-warning px-2 pb-3 border rounded  etiqueta">Modelo *</label>
                     <select class="form-control" id="Modelo" name="modelo">
-                        <option>Selecionar Modelo</option>
+                        <option>Modelo</option>
                     </select>
                     <input id="field-modelo" name="field-modelo" hidden >
                     <br>
@@ -389,7 +396,7 @@
 
 
                  <!-- CAMPO ANO -->
-                <div class="col-3" id="campo-ano">
+                <div class="" id="campo-ano">
                      <label class="bg-warning px-2 pb-3 border rounded  etiqueta">Ano *</label>
                     <select class="form-control" id="Ano" name="ano">
                         <option>Ano</option>
@@ -400,7 +407,7 @@
 
 
                  <!-- CAMPO COMBUSTIVEL -->
-                <div class="col-3" id="campo-combustivel">
+                <div class="" id="campo-combustivel">
                     <label  class="bg-warning px-2 pb-3 border rounded  etiqueta">Combustível</label>
                     <select class="form-control col-10" id="Combustivel" name="combustivel">
                          <option>Combustível</option>
@@ -419,9 +426,9 @@
 
 
                      <!-- CAMPO COR -->
-                <div class="col-3" id="campo-cor">
+                <div class="" id="campo-cor">
                     <label  class="bg-warning px-2 pb-3 border rounded  etiqueta">Cor</label>
-                    <select class="form-control col-8" id="Cor" name="cor">
+                    <select class="form-control " id="Cor" name="cor">
                         <option>Selecionar Cor</option>
                          {% for cores in cores %}
                          <option value="{{cores.nome_cor}}" id="{{cores.id}}">{{cores.nome_cor}}</option>
@@ -435,9 +442,9 @@
 
 
                  <!-- CAMPO PORTAS -->
-                 <div id="campo-portas" class="col-2">
+                 <div id="campo-portas" class="">
                      <label  class="bg-warning px-2 pb-3 border rounded  etiqueta">Portas</label>
-                     <select class="form-control col-8" id="portas" name="portas">
+                     <select class="form-control " id="portas" name="portas">
                          <option>Portas</option>
                          <option value="2 Portas">2 PORTAS</option>
                          <option value="3 Portas">3 PORTAS</option>
@@ -448,7 +455,7 @@
                  </div>
 
                      <!-- CAMPO CAMBIO -->
-                 <div id="campo-cambio" class="col-3">
+                 <div id="campo-cambio" class="">
                      <label  class="bg-warning px-2 pb-3 border rounded  etiqueta">Câmbio</label>
                      <select class="form-control" id="cambio" name="cambio">
                          <option>CÂMBIO</option>
@@ -462,9 +469,9 @@
 
 
                   <!-- CAMPO IPVA -->
-                 <div id="campo-ipva" class="col-3">
+                 <div id="campo-ipva" class="">
                      <label  class="bg-warning px-2 pb-3 border rounded  etiqueta">IPVA</label>
-                     <select class="form-control col-8" id="ipva" name="ipva">
+                     <select class="form-control " id="ipva" name="ipva">
                          <option value="ipva pago">SIM</option>
                          <option value="ipva nao pago">NÃO</option>
 
@@ -473,7 +480,7 @@
 
 
                      <!-- CAMPO PLACA -->
-                 <div id='campo-placa' class="col-8">
+                 <div id='campo-placa' class="">
                     <label  class="bg-warning px-2 pb-3 border rounded  etiqueta">Placa</label>
                     <input type="text" maxlength="7" name="placa" id="placa" class="form-control col-2" placeholder="ABC - 1B34"  onkeyup="validaPlaca();" >
                     <span id="validacao"></span>
@@ -695,7 +702,7 @@
                 <div id="campo-valor">
                     <label  for="valor" class="bg-warning px-2 pb-3 border rounded  etiqueta" style="font-weight:bold;" >VALOR *</label>
 
-                    <div><input type="text"  name="valor" id="valor" value="" class="form-control col-3" size="12"  onKeyUp="mascaraMoeda(this, event)">
+                    <div><input type="text"  name="valor" id="valor" value="" class="form-control " size="12"  onKeyUp="mascaraMoeda(this, event)">
                         <div id="validacao-input-valor"></div>
 
                 </div>
@@ -781,6 +788,8 @@
                         <div>
                             <label class="bg-warning border rounded col-12" id="header-itens-opcionais">Itens Opcionais</label>
                         </div>
+                        <!--Scoll -->
+                        <div id="scroll-itens-opcionais">
                          <!-- CHECK BOX OPCIONAIS VEÍCULOS----------------------------- -->
 
 
@@ -1353,6 +1362,7 @@
                                 <!-- FINAL   VOLANTE COM REGULAGEM DE ALTURA  -->
 
                             </span>
+                        </div>
                     </div>
 
                     <script type="text/javascript">
